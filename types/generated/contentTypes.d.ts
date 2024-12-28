@@ -362,84 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiCourseCourse extends Schema.CollectionType {
-  collectionName: 'courses';
-  info: {
-    singularName: 'course';
-    pluralName: 'courses';
-    displayName: 'Course';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Course: Attribute.String & Attribute.Required;
-    Location: Attribute.String;
-    slug: Attribute.UID & Attribute.Required;
-    Description: Attribute.Blocks;
-    records: Attribute.Relation<
-      'api::course.course',
-      'oneToMany',
-      'api::record.record'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::course.course',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::course.course',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiRecordRecord extends Schema.CollectionType {
-  collectionName: 'records';
-  info: {
-    singularName: 'record';
-    pluralName: 'records';
-    displayName: 'Record';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Category: Attribute.Enumeration<['Male', 'Female', 'Age-graded']> &
-      Attribute.Required;
-    Name: Attribute.String & Attribute.Required;
-    Date: Attribute.Date & Attribute.Required;
-    StravaLink: Attribute.String;
-    ArchiveRecordURL: Attribute.String;
-    Minutes: Attribute.Integer & Attribute.Required;
-    Seconds: Attribute.Integer & Attribute.Required;
-    EventNumber: Attribute.Integer;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::record.record',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::record.record',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -866,6 +788,84 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiCourseCourse extends Schema.CollectionType {
+  collectionName: 'courses';
+  info: {
+    singularName: 'course';
+    pluralName: 'courses';
+    displayName: 'Course';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Course: Attribute.String & Attribute.Required;
+    Location: Attribute.String;
+    slug: Attribute.UID & Attribute.Required;
+    Description: Attribute.Blocks;
+    records: Attribute.Relation<
+      'api::course.course',
+      'oneToMany',
+      'api::record.record'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::course.course',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::course.course',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiRecordRecord extends Schema.CollectionType {
+  collectionName: 'records';
+  info: {
+    singularName: 'record';
+    pluralName: 'records';
+    displayName: 'Record';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Category: Attribute.Enumeration<['Male', 'Female', 'Age-graded']> &
+      Attribute.Required;
+    Name: Attribute.String & Attribute.Required;
+    Date: Attribute.Date & Attribute.Required;
+    StravaLink: Attribute.String;
+    ArchiveRecordURL: Attribute.String;
+    Minutes: Attribute.Integer & Attribute.Required;
+    Seconds: Attribute.Integer & Attribute.Required;
+    EventNumber: Attribute.Integer;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::record.record',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::record.record',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -876,8 +876,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::course.course': ApiCourseCourse;
-      'api::record.record': ApiRecordRecord;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -886,6 +884,8 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::course.course': ApiCourseCourse;
+      'api::record.record': ApiRecordRecord;
     }
   }
 }
